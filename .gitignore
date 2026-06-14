@@ -25,3 +25,6 @@ dist-ssr
 
 playwright-report/
 test-results/
+
+allure-results/
+allure-report/

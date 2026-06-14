@@ -11,7 +11,9 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "allure:e2e": "playwright test && allure generate ./allure-results -o ./allure-report --clean",
+    "allure:open": "allure open ./allure-report"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.10.4",
@@ -26,6 +28,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "allure-playwright": "^3.10.0",
     "typescript": "^5.5.4",
     "vite": "^4.1.0"
   },

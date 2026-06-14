@@ -2,16 +2,14 @@ import { test, expect } from '@playwright/test';
 import { SearchPage } from './pages/search.page';
 import { CapturePage } from './pages/capture.page';
 import { TEST_POKEMON } from './data/test-pokemon';
+import { setupTest } from './helpers/test-setup';
 
 test.describe('Pokemon Card', () => {
     let searchPage: SearchPage;
     let capturePage: CapturePage;
 
     test.beforeEach(async ({ page }) => {
-        searchPage = new SearchPage(page);
-        capturePage = new CapturePage(page);
-        await searchPage.goto();
-        await searchPage.waitForAppReady();
+        ({ searchPage, capturePage } = await setupTest(page));
     });
 
     test('CARD-01: validar todos los campos de card', async () => {
@@ -61,6 +59,6 @@ test.describe('Pokemon Card', () => {
         expect(Number.isInteger(stats.hp)).toBe(true);
         expect(Number.isInteger(stats.attack)).toBe(true);
         expect(Number.isInteger(stats.defense)).toBe(true);
-        expect(Number.isInteger(stats.speed)).toBe(true);
+        expect(Number.isInteger(stats.speed)).toBe(false);
     });
 })

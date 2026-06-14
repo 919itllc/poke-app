@@ -2,16 +2,14 @@ import { test, expect } from '@playwright/test';
 import { SearchPage } from './pages/search.page';
 import { CapturePage } from './pages/capture.page';
 import { TEST_POKEMON } from './data/test-pokemon';
+import { setupTest } from './helpers/test-setup';
 
 test.describe('Search', () => {
     let searchPage: SearchPage;
     let capturePage: CapturePage;
 
     test.beforeEach(async ({ page }) => {
-        searchPage = new SearchPage(page);
-        capturePage = new CapturePage(page);
-        await searchPage.goto();
-        await searchPage.waitForAppReady();
+        ({ searchPage, capturePage } = await setupTest(page));
     });
 
     test('SEARCH-01: buscar Pokemon por nombre valido', async () => {

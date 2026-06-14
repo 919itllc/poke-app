@@ -62,9 +62,11 @@ export class CapturePage extends BasePage {
      * @Liberar todos los Pokemon de la party, uno por uno.
      */
     async releaseAll(): Promise<void> {
-        while (!(await this.isPartyEmpty())) {
-            await this.releaseByIndex(0);
-            await this.page.waitForTimeout(300);
+        const firstItem = this.getCapturedPokemonLocator(0);
+
+        while ((await firstItem.count()) > 0) {
+            await firstItem.click();
+            await firstItem.waitFor({ state: 'detached', timeout: 5000 }).catch(() => { });
         }
     }
 
