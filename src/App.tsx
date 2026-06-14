@@ -58,7 +58,7 @@ function App() {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${searchInput.toLowerCase()}`
+        `/api/pokemon/${searchInput.toLowerCase()}`
       );
 
       if (!response.ok) {
