@@ -3,6 +3,7 @@ import { SearchPage } from './pages/search.page';
 import { CapturePage } from './pages/capture.page';
 import { TEST_POKEMON } from './data/test-pokemon';
 import { setupTest } from './helpers/test-setup';
+import { attachHealingSuggestion } from './helpers/healing-reporter';
 
 test.describe('Release', () => {
     let searchPage: SearchPage;
@@ -10,6 +11,10 @@ test.describe('Release', () => {
 
     test.beforeEach(async ({ page }) => {
         ({ searchPage, capturePage } = await setupTest(page));
+    });
+
+    test.afterEach(async ({ }, testInfo) => {                             // ← NUEVO (2)
+        await attachHealingSuggestion(testInfo);                         // ← NUEVO (3)
     });
 
     test('RELEASE-01: liberar el unico pokemon liberado', async () => {

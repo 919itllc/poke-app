@@ -3,6 +3,7 @@ import { SearchPage } from './pages/search.page';
 import { CapturePage } from './pages/capture.page';
 import { TEST_POKEMON } from './data/test-pokemon';
 import { setupTest } from './helpers/test-setup';
+import { attachHealingSuggestion } from './helpers/healing-reporter';
 
 test.describe('Pokemon Card', () => {
     let searchPage: SearchPage;
@@ -10,6 +11,10 @@ test.describe('Pokemon Card', () => {
 
     test.beforeEach(async ({ page }) => {
         ({ searchPage, capturePage } = await setupTest(page));
+    });
+
+    test.afterEach(async ({ }, testInfo) => {                             // ← NUEVO (2)
+        await attachHealingSuggestion(testInfo);                         // ← NUEVO (3)
     });
 
     test('CARD-01: validar todos los campos de card', async () => {
@@ -43,7 +48,7 @@ test.describe('Pokemon Card', () => {
         expect(typeCount).toBe(2);
 
         const types = await searchPage.getPokemonTypes();
-        expect(types).toContain('fire');
+        expect(types).toContain('fires');
         expect(types).toContain('flying');
     });
 
@@ -59,6 +64,6 @@ test.describe('Pokemon Card', () => {
         expect(Number.isInteger(stats.hp)).toBe(true);
         expect(Number.isInteger(stats.attack)).toBe(true);
         expect(Number.isInteger(stats.defense)).toBe(true);
-        expect(Number.isInteger(stats.speed)).toBe(false);
+        expect(Number.isInteger(stats.speed)).toBe(true);
     });
 })
