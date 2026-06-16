@@ -14,7 +14,10 @@
     "test:e2e:report": "playwright show-report",
     "allure:e2e": "pwsh -Command \"Remove-Item allure-results -Recurse -Force -ErrorAction SilentlyContinue; playwright test; allure generate ./allure-results -o ./allure-report --clean\"",
     "allure:open": "allure open ./allure-report",
-    "heal:report": "npx tsx scripts/heal-report.ts"
+    "heal:report": "npx tsx scripts/heal-report.ts",
+    "test:e2e:visual:update": "yarn test:e2e tests/visual.spec.ts --update-snapshots",
+    "test:e2e:visual": "playwright test tests/visual.spec.ts",
+    "test:e2e:all": "playwright test"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.10.4",

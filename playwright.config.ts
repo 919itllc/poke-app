@@ -30,6 +30,16 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
   },
 
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixels: 100,
+      threshold: 0.2,
+      animations: 'disabled'
+    }
+  },
+
+  snapshotDIr: './tests/visual-baselines',
+
   /* Configure projects for major browsers */
   projects: [
     {
